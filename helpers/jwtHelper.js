@@ -3,8 +3,8 @@ const jwt = require("jsonwebtoken");
 
 const crateAccessJWT = async (email, _id) => {
     try {
-        const accessJWT = await jwt.sign({ email }, process.env.JWT_ACCESS_SECRET, {
-            expiresIn: "1d", //change this to 15m
+        const accessJWT = await jwt.sign({user:{"email": email }}, process.env.JWT_ACCESS_SECRET, {
+            expiresIn: "1m", //change this to 15m
         });
 
        

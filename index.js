@@ -11,6 +11,7 @@ const { errorHandler } = require("./middleware/errorHandler");
 const port = process.env.PORT || 3001;
 
 const connectDb = require('./config/connectDb');
+
 connectDb();
 
 
