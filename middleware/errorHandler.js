@@ -20,7 +20,7 @@ const errorHandler = (err,req,res,next)=>{
             break;
         default:
             console.log({title:"other error: ",message:err.message});
-            res.json({title:"other error: ",message:err.message});
+            res.status(500).json({title:"not able to perform operation at the current moment"});
 
             break;
     }
