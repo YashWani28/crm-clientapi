@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const crateAccessJWT = async (email, _id) => {
     try {
         const accessJWT = await jwt.sign({user:{"email": email }}, process.env.JWT_ACCESS_SECRET, {
-            expiresIn: "1h", //change this to 15m
+            expiresIn: "7d", //change this to 15m
         });
 
        

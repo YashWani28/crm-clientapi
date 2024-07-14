@@ -14,9 +14,26 @@ const connectDb = require('./config/connectDb');
 
 connectDb();
 
+// app.use((req,res,next)=>{
+//     res.setHeader("Access-Control-Allow-Origin","http://localhost:3000");
+//     res.header(
+//         "Access-Control-Allow-Headers",
+//         "Origin, X-Requested-With,Content-Type,Accept,Authorization"
+//     );
+//     res.header(
+//         "Access-Control-Allow-Methods",
+//         "GET, POST, PUT, DELETE, OPTIONS"
+//     );
+//     next();
+// })
 
+
+  
+app.use(cors({
+    origin:"http://localhost:3000",
+    methods:["GET","POST","PUT","PATCH"]
+}));
 app.use(helmet());
-app.use(cors());
 app.use(morgan('tiny'));
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());

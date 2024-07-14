@@ -69,7 +69,8 @@ const getUser = asyncHandler(async(req,res)=>{
         res.status(404);
         throw new Error("User not found!!");
     }
-    res.json(user);
+    const{name,phone,address,company}=user;
+    res.json({email,name,phone,address,company});
 });
 
 const resetPasswordPin = asyncHandler(async(req,res)=>{

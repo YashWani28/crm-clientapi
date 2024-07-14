@@ -42,9 +42,10 @@ const getAllTickets=asyncHandler(async(req,res)=>{
         throw new Error("No user found");
     }
     const id=user._id;
-    console.log(id);
+    //console.log(id);
     try{
         const tickets=await Ticket.find({clientId:id});
+       // console.log(tickets)
         res.json(tickets);
 
     }catch(error)

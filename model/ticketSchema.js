@@ -30,6 +30,7 @@ const TicketSchema = new Schema({
     desc:{
         type:String,
         required:true,
+        maxlength:1000,
 
     },
     feedback:{
