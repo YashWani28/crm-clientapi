@@ -1,7 +1,7 @@
 const User = require("../model/usersSchema");
 const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcrypt");
-const {crateAccessJWT} = require("../helpers/jwtHelper");
+const {crateAccessJWT, createRefreshJWT} = require("../helpers/jwtHelper");
 const {setPasswordResetPin,getPasswordResetPin,deletePasswordResetPin} = require("../model/resetPinModel");
 const {send,sendsuccess} = require("../helpers/emailHelper");
 const isWithinTimeDifferenceT = require("../utils/checkTimeDifference");
@@ -46,10 +46,12 @@ const loginUser = asyncHandler(asyncHandler(async(req,res)=>{
     if(user && (await bcrypt.compare(password,user.password))){
 
         const accessJWT = await crateAccessJWT(user.email);    
-
+        const refreshJWT = await createRefreshJWT(user.email);
+        console.log(refreshJWT);
         res.json({
             message: "Login Successfully!",
             accessJWT,
+            refreshJWT,
             }
         )
 
@@ -141,7 +143,17 @@ const logoutUser = asyncHandler(async(req,res)=>{
         res.status(404);
         throw new Error("User does not exist!");
     }
-    res.json({"message":'you will be automatically logged out once your token expires'})
+    await User.findOneAndUpdate(
+        { email },
+        {
+            $set: {
+                "refreshJWT.token": "",
+                "refreshJWT.addedAt": Date.now()
+            }
+        },
+        { new: true }
+    );
+    res.json({"message":'success'})
 
 });
 

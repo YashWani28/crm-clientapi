@@ -40,6 +40,8 @@ app.use(bodyParser.json());
 
 app.use("/v1/users",require("./routers/userRouter"));
 app.use("/v1/tickets",require("./routers/ticketRouter"));
+app.use("/v1/token",require("./routers/tokenRouter"));
+
 app.use(errorHandler);
 
 
