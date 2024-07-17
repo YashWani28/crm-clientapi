@@ -16,20 +16,20 @@ router.get("/",validateRefreshToken,async(req,res)=>{
     // console.log(today-timeInDB.getDate())
     if(tokenInDB===sentrefreshtoken){
         const accessToken=await crateAccessJWT(email);
-        res.json({accessToken});
+        res.json({"message":"success",accessToken});
     }
     else{
-        await User.findOneAndUpdate(
-            { email },
-            {
-                $set: {
-                    "refreshJWT.token": refreshJWT,
-                    "refreshJWT.addedAt": Date.now()
-                }
-            },
-            { new: true }
-        );
-        res.json({"message":"Token invalid or expired"});
+        res.status(401).json({"message":"Token invalid or expired"});
+        // await User.findOneAndUpdate(
+        //     { email },
+        //     {
+        //         $set: {
+        //             "refreshJWT.token": refreshJWT,
+        //             "refreshJWT.addedAt": Date.now()
+        //         }
+        //     },
+        //     { new: true }
+        // );
     }
     
 })

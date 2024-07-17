@@ -31,7 +31,7 @@ connectDb();
   
 app.use(cors({
     origin:"http://localhost:3000",
-    methods:["GET","POST","PUT","PATCH"]
+    methods:["GET","POST","PUT","PATCH","DELETE"]
 }));
 app.use(helmet());
 app.use(morgan('tiny'));

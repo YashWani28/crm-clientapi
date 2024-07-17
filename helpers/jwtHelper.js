@@ -4,7 +4,7 @@ const User = require('../model/usersSchema');
 const crateAccessJWT = async (email, _id) => {
     try {
         const accessJWT = await jwt.sign({user:{"email": email }}, process.env.JWT_ACCESS_SECRET, {
-            expiresIn: "60d", //change this to 15m
+            expiresIn: "15s", //change this to 15m
         });
 
        

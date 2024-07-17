@@ -47,7 +47,7 @@ const loginUser = asyncHandler(asyncHandler(async(req,res)=>{
 
         const accessJWT = await crateAccessJWT(user.email);    
         const refreshJWT = await createRefreshJWT(user.email);
-        console.log(refreshJWT);
+       // console.log(refreshJWT);
         res.json({
             message: "Login Successfully!",
             accessJWT,

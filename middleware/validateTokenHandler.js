@@ -59,7 +59,7 @@ const validateRefreshToken = asyncHandler(async (req, res, next) => {
             req.refreshtoken = token;
             next();
         } catch (err) {
-            res.status(401);
+            //res.status(401);
             if (err.name === 'TokenExpiredError') {
                 let decoded = jwt.decode(token);
                 let email = decoded.user.email;
@@ -75,7 +75,8 @@ const validateRefreshToken = asyncHandler(async (req, res, next) => {
                     },
                     { new: true }
                 );
-
+                // console.log("hi");
+                res.json({"message":"fail"});
                 throw new Error("Session Expired. Please log in again.");
             } else {
                 throw new Error("Invalid token.");
