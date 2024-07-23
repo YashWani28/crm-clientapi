@@ -5,6 +5,7 @@ const asyncHandler = require("express-async-handler");
 
 const createTicket=asyncHandler(async(req,res)=>{
     const{issue,desc,feedback}=req.body;
+    console.log(issue,desc,feedback);
     const email=req.user.email;
     const user=await User.findOne({email});
     if(!user){
@@ -83,7 +84,7 @@ const updateMessage = asyncHandler(async (req, res) => {
         return;
     }
     try {
-        console.log("hi");
+        
         const updatedTicket = await Ticket.findOneAndUpdate(
             { _id: id },
             {
